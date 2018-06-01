@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task4</title>
+</head>
+<body>
+    <h1>task4</h1>
+    <button id="name-id" onclick="findIdByName('Kai',tree)">根据name寻找id</button>
+    <button id="id-name" onclick="findNameById(0,tree)">根据id寻找name</button>
+    <button id="pre" onclick="getListWithDLR(tree)">前序遍历</button>
+    <button id="mid" onclick="getListWithLDR(tree)">中序遍历</button>
+    <button id="last" onclick="getListWithLRD(tree)">后序遍历</button>
+    <script>
+    var tree = {
+        "id": 0,
+        "name": "root",
+        "left": {
+            "id": 1,
+            "name": "Simon",
+            "left": {
+                "id": 3,
+                "name": "Carl",
+                "left": {
+                    "id": 7,
+                    "name": "Lee",
+                    "left": {
+                        "id": 11,
+                        "name": "Fate"
+                    }
+                },
+                "right": {
+                    "id": 8,
+                    "name": "Annie",
+                    "left": {
+                        "id": 12,
+                        "name": "Saber"
+                    }
+                }
+            },
+            "right": {
+                "id": 4,
+                "name": "Tony",
+                "left": {
+                    "id": 9,
+                    "name": "Candy"
+                }
+            }
+        },
+        "right": {
+            "id": 2,
+            "name": "right",
+            "left": {
+                "id": 5,
+                "name": "Carl",
+            },
+            "right": {
+                "id": 6,
+                "name": "Carl",
+                "right": {
+                    "id": 10,
+                    "name": "Kai"
+                }        
+            }
+        }
+    }
+
+    // 假设id和name均不会重复，根据输入name找到对应的id
+    function findIdByName(na,obj) {
+        for(x in obj){
+        if(x=="name"&&obj[x]==na){
+            console.log(obj["id"]);
+        }
+        else if(x=="left"){
+            findIdByName(na,obj[x]);
+        }else if(x=="right"){
+            findIdByName(na,obj[x]);
+        }
+    }
+    }
+
+    // 假设id和name均不会重复，根据输入id找到对应的name
+    function findNameById(ids,obj) {
+        // console.log(obj)
+        // console.log(ids)
+       for(x in obj){
+       if(x=="id"){
+        if(obj[x]==ids){
+           console.log(obj["name"]);
+       }}
+       else if(x=="left"){
+           findIdByName(ids,obj[x]);
+       }else if(x=="right"){
+           findIdByName(ids,obj[x]);
+       }
+    }
+}
+
+
+    // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+    function getListWithDLR(obj) {  
+          console.log(obj.id);  
+          if(obj.left){  
+              getListWithDLR(obj.left);  
+          }  
+          if(obj.right){  
+              getListWithDLR(obj.right);  
+          }  
+      }  
+
+    // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+   function getListWithLDR(obj) {  
+         if(obj.left){  
+             getListWithLDR(obj.left);  
+         }  
+        console.log(obj.id);  
+         if(obj.right){  
+             getListWithLDR(obj.right);  
+         }  
+     }  
+    // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+    function getListWithLRD(obj) {
+         if(obj.left){  
+             getListWithLRD(obj.left);  
+         }   
+         if(obj.right){  
+             getListWithLRD(obj.right);  
+         } 
+         console.log(obj.id);  
+    }
+    </script>
+    
+</body>
+</html>

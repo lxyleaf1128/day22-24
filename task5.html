@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task5</title>
+</head>
+<body>
+	<h1>part one</h1>
+	<input id="queue-input" type="text">
+	<p id="queue-cont">队列内容：apple-&gt;pear</p>    
+	<p id="queue-head"></p>
+	<p id="b"></p>
+	<button id="in-btn" onclick="inqueue()">入队</button>
+	<button id="out-btn" onclick="outqueue()">出队</button>
+	<button id="font-btn" onclick="printqueue()">打印队头元素内容</button>
+	<button id="empty-btn" onclick="judgequeue()">判断队列是否为空</button>
+
+	<script>
+	var queue = ["apple", "pear"];
+	queue.reverse();//队头在最右，先反转过来
+	document.getElementById('queue-cont').innerHTML="队列内容："+queue.join("-&gt;");
+	function inqueue() {//入队本来在队尾，用push方法，但是这里先把队反转，跟在pear后面使用队头插入元素unshift方法
+		var ele=document.getElementById('queue-input').value;
+		queue.unshift(ele);
+		document.getElementById('queue-cont').innerHTML="队列内容："+queue.join("-&gt;");
+	}
+	function outqueue() {
+		queue.pop();//从队头删除元素，反转l,要删除数组最后面一个元素
+		document.getElementById('queue-cont').innerHTML="队列内容："+queue.join("-&gt;");
+	}
+	function printqueue() {
+		var head=queue[queue.length-1];//队列反转了，队头元素下标为长减1
+		document.getElementById('queue-head').innerHTML="队头元素："+head;	
+	}
+	function judgequeue() {
+		if(queue.length>0){
+		document.getElementById('b').innerHTML="队列不为空";	
+		}else{
+		document.getElementById('b').innerHTML="队列为空";	
+		}
+	}
+	</script>
+	<!--实现如阅读材料中，队列的相关入队、出队、获取队头、判空的操作
+队头对应数组中最后一个元素
+入队和出队操作后，需要在 id 为 queue-cont 的 p 标签中更新显示队列中的内容，队头在最右侧，中间用 -> 连接（练习使用数组的join方法）-->	
+
+
+
+	<h1>part two</h1>
+	<input id="queue-input2" type="text">
+	<p id="queue-cont2">队列内容：apple&lt;-pear</p>    
+	<p id="queue-head2"></p>
+	<p id="b2"></p>
+	<button id="in-btn2" onclick="inqueue2()">入队</button>
+	<button id="out-btn2" onclick="outqueue2()">出队</button>
+	<button id="font-btn2" onclick="printqueue2()">打印队头元素内容</button>
+	<button id="empty-btn2" onclick="judgequeue2()">判断队列是否为空</button>
+
+	<script>
+		var queue2 = ["apple", "pear"];
+		document.getElementById('queue-cont2').innerHTML="队列内容："+queue2.join("&lt;-");
+		function inqueue2() {
+			var ele=document.getElementById('queue-input2').value;
+			queue2.push(ele);//在队尾添加元素即可
+			document.getElementById('queue-cont2').innerHTML="队列内容："+queue2.join("&lt;-");
+		}
+		function outqueue2() {
+			queue2.shift();//从队头删除元素
+			document.getElementById('queue-cont2').innerHTML="队列内容："+queue2.join("&lt;-");
+		}
+		function printqueue2() {
+			var head=queue2[0];
+			document.getElementById('queue-head2').innerHTML="队头元素："+head;	
+		}
+		function judgequeue2() {
+			if(queue2.length>0){
+			document.getElementById('b2').innerHTML="队列不为空";	
+			}else{
+			document.getElementById('b2').innerHTML="队列为空";	
+			}
+		}
+		</script>
+</body>
+</html>
+<!--实现如阅读材料中，队列的相关入队、出队、获取队头、判空的操作
+队头对应数组中第一个元素
+入队和出队操作后，需要在 id 为 queue-cont 的 p 标签中更新显示队列中的内容，队头在最左侧，中间用 <- 连接（练习使用数组的join方法）-->
